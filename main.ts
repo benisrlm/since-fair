@@ -3,14 +3,9 @@ input.onButtonPressed(Button.A, function () {
 	
 })
 basic.forever(function () {
-    reading = pins.digitalReadPin(DigitalPin.P1)
-    led.plotBarGraph(
-    pins.digitalReadPin(DigitalPin.P1),
-    1023
-    )
-    if (input.buttonIsPressed(Button.A)) {
-        let if_the_variable_to_0 = 0
-        basic.showNumber(reading)
-        basic.showNumber(if_the_variable_to_0)
-    }
+    reading = pins.analogReadPin(AnalogPin.P0)
+    serial.writeNumber(reading)
+    serial.writeLine("")
+    servos.P2.setAngle(reading / 10)
+    basic.pause(500)
 })
