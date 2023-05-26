@@ -1,11 +1,18 @@
-let reading = 0
 input.onButtonPressed(Button.A, function () {
 	
 })
+let reading = 0
+servos.P0.setAngle(115)
 basic.forever(function () {
-    reading = pins.analogReadPin(AnalogPin.P0)
+    basic.pause(500)
+    reading = pins.analogReadPin(AnalogPin.P1)
     serial.writeNumber(reading)
     serial.writeLine("")
-    servos.P2.setAngle(reading / 10)
-    basic.pause(500)
+    if (450 < reading && reading < 490) {
+        serial.writeLine("launch")
+        servos.P0.setAngle(50)
+        basic.pause(2000)
+        servos.P0.setAngle(115)
+        basic.pause(5000)
+    }
 })
